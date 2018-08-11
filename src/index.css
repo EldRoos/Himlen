@@ -1,0 +1,122 @@
+html {
+  height: 100%;
+  background: #c8e5f530;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+  background: linear-gradient(
+    #0078ce30 0%,
+    #4ab8eb30 400px,
+    #a7d8f230 700px,
+    #c8e5f530 1000px
+  );
+}
+
+.title {
+  font-size: 32px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  padding: 20px 30px 15px 5px;
+}
+
+.location {
+  padding-top: 10px;
+}
+
+.mtop {
+  margin-top: 20px;
+}
+
+.sky {
+  background: #004da930;
+}
+
+.headerrow {
+  border: 1px solid lightgray;
+  background: #eaf3ff;
+}
+
+.day {
+  border: 1px solid lightgray;
+  cursor: pointer;
+  background: white;
+}
+
+.selected {
+  background: #eaf3ff;
+}
+
+.day:hover {
+  background: #f0f7ff;
+}
+
+.hour {
+  border: 1px solid lightgray;
+}
+
+.sun {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 3px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 0 3px 0;
+}
+
+.frame {
+  width: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.move {
+  -webkit-animation: lefttoright 120s infinite; /* Chrome, Safari, Opera */
+  animation: lefttoright 120s infinite;
+  animation-timing-function: linear;
+  position: relative;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes lefttoright {
+  0% {
+    left: 0px;
+    top: 0px;
+    margin-left: -1500px;
+  }
+  100% {
+    left: 100%;
+    margin-left: 500px;
+  }
+}
+
+/* Standard syntax */
+@keyframes lefttoright {
+  0% {
+    left: 0px;
+    top: 0px;
+    margin-left: -1500px;
+  }
+  100% {
+    left: 100%;
+    margin-left: 500px;
+  }
+}
+
+.power {
+  position: fixed;
+  right: 5px;
+  bottom: 2px;
+  font-size: 10px;
+}
+
+.leaflet-container {
+  height: 600px;
+}
