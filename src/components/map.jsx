@@ -13,9 +13,8 @@ const markericon = new Leaflet.Icon({
   popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
-const southWest = [52.50044, 2.250475];
-const northEast = [70.742227, 37.934697];
-//const bounds = L.latLngBounds(southWest, northEast);
+//const southWest = [52.50044, 2.250475];
+//const northEast = [70.742227, 37.934697];
 
 export default class DraggableMap extends Component {
   state = {
@@ -28,12 +27,15 @@ export default class DraggableMap extends Component {
       lng: 18.058631
     },
     bounds: {
-      southWest: { lat: 52.50044, lng: 2.250475 },
-      northEast: { lat: 70.742227, lng: 37.934697 }
+      //southWest: { lat: 52.50044, lng: 2.250475 },
+      //northEast: { lat: 70.742227, lng: 37.934697 }
+      southWest: { lat: 54, lng: 4 },
+      northEast: { lat: 71, lng: 28 }
     },
     zoom: 7,
     draggable: true
   };
+  //const {  } = this.props.leaflet;
   refmarker = React.createRef();
 
   toggleDraggable = () => {
@@ -41,10 +43,20 @@ export default class DraggableMap extends Component {
   };
 
   updatePosition = () => {
-    const { lat, lng } = this.refmarker.current.leafletElement.getLatLng();
+    //const { lat, lng } = this.refmarker.current.leafletElement.getLatLng();
+    var { lat, lng } = this.refmarker.current.leafletElement.getLatLng();
+    if (lat < this.state.bounds.southWest.lat)
+      lat = this.state.bounds.southWest.lat;
+    else if (lat > this.state.bounds.northEast.lat)
+      lat = this.state.bounds.northEast.lat;
+    if (lng < this.state.bounds.southWest.lng)
+      lng = this.state.bounds.southWest.lng;
+    else if (lng > this.state.bounds.northEast.lng)
+      lng = this.state.bounds.northEast.lng;
     this.setState({
       marker: { lat, lng }
     });
+    this.props.action(this.state.marker);
   };
 
   render() {
@@ -58,19 +70,22 @@ export default class DraggableMap extends Component {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           minZoom={5}
           maxZoom={13}
-          maxBounds={this.state.bound}
+          //bounds={this.state.bounds}
+          //boundsOptions={{ padding: [50, 50] }}
+          //maxBounds={this.state.bounds}
         />
+
         <Marker
           icon={markericon}
           draggable={this.state.draggable}
           onDragend={this.updatePosition}
-          //   onClick={this.updatePosition}
+          //onClick={this.updatePosition}
           position={markerPosition}
           ref={this.refmarker}
         >
           <Popup minWidth={90}>
             <span onClick={this.toggleDraggable}>
-              {this.state.draggable ? "DRAG MARKER" : "MARKER FIXED"}
+              {this.state.draggable ? "Flyttbar markör" : "Fixerad markör"}
             </span>
           </Popup>
         </Marker>

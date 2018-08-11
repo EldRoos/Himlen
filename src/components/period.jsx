@@ -54,17 +54,32 @@ class Period extends Component {
     this.setState({ selected });
   };
 
+  handleChangedCoordinates = marker => {
+    //console.log("Changed coord: " + marker.lat + ", " + marker.lng);
+    const lat = Math.floor(marker.lat * 1000000) / 1000000;
+    const lon = Math.floor(marker.lng * 1000000) / 1000000;
+    this.setState({
+      lat,
+      lon
+    });
+    for (var i = 0; i < nodays; i++) {
+      this.getSunTimes(i);
+    }
+    this.getForecast();
+    this.getLocation();
+  };
+
   render() {
     return (
       <React.Fragment>
-        <Map lat={this.state.lat} lon={this.state.lon} />
-        <div class="row">
+        <Map action={this.handleChangedCoordinates} />
+        <div className="row">
           <div className="title col-lg-3 col-md-4 col-sm-5">Dagsöversikt</div>
           <div className="location col-lg-9 col-md-8 col-sm-7">
             <b>Plats:</b> {this.state.location}
           </div>
         </div>
-        <div class="row">
+        <div className="row">
           <table className="table col-sm-12">
             <thead>
               <tr className="headerrow">
@@ -213,6 +228,7 @@ class Period extends Component {
         var k = 1;
 
         const days = [..._this.state.days];
+        for (var l = 0; l < days.length; l++) days[l].hours = []; // Empty old hours
 
         //Go through all hours and store data
         for (var i = 0; i < json.timeSeries.length; i++) {
