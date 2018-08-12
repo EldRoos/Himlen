@@ -1,5 +1,6 @@
 Himlen:
 -------
+v0.1 2018-08-12
 En uppgift för att visa kunskap om API:er och React.
 
 Installation:
@@ -34,6 +35,8 @@ Brister:
 	* Ingen installation utan alla filer är incheckade - och de är många. Borde ändras till installations instruktioner istället.
 	
 	* En readme för Engelska också.
+	
+	* Kan flytta utanför Skandinavien på kartan.
 
 
 Av:
